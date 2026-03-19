@@ -1,1 +1,36 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Information Management</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const energyReadingInput = document.getElementById('energy-reading');
+            const saveButton = document.getElementById('save-button');
+            const displayReading = document.getElementById('display-reading');
+
+            // Load saved reading from local storage
+            const savedReading = localStorage.getItem('energyReading');
+            if (savedReading) {
+                displayReading.textContent = `Last saved energy reading: ${savedReading} kWh`;
+            }
+
+            // Save the energy reading to local storage
+            saveButton.addEventListener('click', function() {
+                const reading = energyReadingInput.value;
+                localStorage.setItem('energyReading', reading);
+                displayReading.textContent = `Last saved energy reading: ${reading} kWh`;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Apartment Information Management</h1>
+    <h2>Energy Readings</h2>
+    <label for="energy-reading">Enter Energy Reading (kWh):</label>
+    <input type="number" id="energy-reading" placeholder="Enter reading..."><br><br>
+    <button id="save-button">Save Reading</button>
+    <p id="display-reading"></p>
+</body>
+</html>
